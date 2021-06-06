@@ -6,7 +6,7 @@
 #include <windows.h>
 
 /***
- * ÒÔÏÂÊÇÅäÖÃÎÄ¼ş
+ * ä»¥ä¸‹æ˜¯é…ç½®æ–‡ä»¶
 ***/
 char file[] = "students.dat";
 struct STU
@@ -18,15 +18,15 @@ struct STU
 long size = sizeof(struct STU);
 
 void echo(){
-    printf("Ñ§Éú³É¼¨¹ÜÀíÏµÍ³\n");
-    printf("1--ÏÔÊ¾ËùÓĞÑ§ÉúµÄ³É¼¨ĞÅÏ¢\n");
-    printf("2--ĞÂÔöÑ§ÉúĞÅÏ¢Óë×Ü·ÖºÍÆ½¾ù·Ö\n");
-    printf("3--¸ù¾İÑ§ºÅ²éÑ¯¸ÄÑ§ÉúµÄ»ù±¾ĞÅÏ¢\n");
-    printf("4--¸ù¾İÑ§ºÅĞŞ¸ÄÄ³Ñ§ÉúĞÅÏ¢\n");
-    printf("5--¸ù¾İÑ§ºÅÉ¾³ıÄ³Ñ§ÉúĞÅÏ¢\n");
-    printf("6--¶ÔÑ§ÉúĞÅÏ¢½øĞĞÅÅĞò\n");
-    printf("0--ÍË³ö³ÌĞò\n");
-    printf("ÇëÊäÈë±àºÅÊ¹ÓÃ¹¦ÄÜ:");
+    printf("å­¦ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ\n");
+    printf("1--æ˜¾ç¤ºæ‰€æœ‰å­¦ç”Ÿçš„æˆç»©ä¿¡æ¯\n");
+    printf("2--æ–°å¢å­¦ç”Ÿä¿¡æ¯ä¸æ€»åˆ†å’Œå¹³å‡åˆ†\n");
+    printf("3--æ ¹æ®å­¦å·æŸ¥è¯¢æ”¹å­¦ç”Ÿçš„åŸºæœ¬ä¿¡æ¯\n");
+    printf("4--æ ¹æ®å­¦å·ä¿®æ”¹æŸå­¦ç”Ÿä¿¡æ¯\n");
+    printf("5--æ ¹æ®å­¦å·åˆ é™¤æŸå­¦ç”Ÿä¿¡æ¯\n");
+    printf("6--å¯¹å­¦ç”Ÿä¿¡æ¯è¿›è¡Œæ’åº\n");
+    printf("0--é€€å‡ºç¨‹åº\n");
+    printf("è¯·è¾“å…¥ç¼–å·ä½¿ç”¨åŠŸèƒ½:");
 }
 
 
@@ -36,43 +36,43 @@ void pressJump(){
     echo();
 }
 
-//³õÊ¼»¯
+//åˆå§‹åŒ–
 void init(){
-    printf("ÕıÔÚ½øĞĞ³õÊ¼»¯\n");
-    //ÎªºóĞøĞÔÄÜÓÅ»¯×öÆÌµæ ÎûÎû
+    printf("æ­£åœ¨è¿›è¡Œåˆå§‹åŒ–\n");
+    //ä¸ºåç»­æ€§èƒ½ä¼˜åŒ–åšé“ºå« å˜»å˜»
     Sleep(1000);
     FILE *fp;
     if((fp = fopen(file,"r")) == NULL){
-        printf("ÎŞ·¨´ò¿ªÎÄ¼ş»ò²»´æÔÚÎÄ¼ş%s\n",file);
-        printf("½«´´½¨ĞÂµÄÎÄ¼ş%s\n",file);
+        printf("æ— æ³•æ‰“å¼€æ–‡ä»¶æˆ–ä¸å­˜åœ¨æ–‡ä»¶%s\n",file);
+        printf("å°†åˆ›å»ºæ–°çš„æ–‡ä»¶%s\n",file);
         fp = fopen(file, "w");
-        printf("%sÎÄ¼ş´´½¨³É¹¦\n",file);
+        printf("%sæ–‡ä»¶åˆ›å»ºæˆåŠŸ\n",file);
     }
     fclose(fp);
 }
 
-//´ò¿ªÎÄ¼ş
+//æ‰“å¼€æ–‡ä»¶
 FILE *openFile(char *mode){
     FILE *fp;
     if((fp = fopen(file,mode)) == NULL){
-        printf("ÎŞ·¨´ò¿ªÎÄ¼ş%s\n",file);
+        printf("æ— æ³•æ‰“å¼€æ–‡ä»¶%s\n",file);
         exit(0);
     }
     return fp;
 }
 
-//ÏÔÊ¾ËùÓĞÑ§Éú³É¼¨ĞÅÏ¢
+//æ˜¾ç¤ºæ‰€æœ‰å­¦ç”Ÿæˆç»©ä¿¡æ¯
 void queryAllInfo(){
     FILE *fp = openFile("r");
     struct STU CurrentSTU;
     char ch = fgetc(fp);
     if(ch == EOF){
-        printf("Ã»ÓĞÑ§ÉúĞÅÏ¢£¡\n");
+        printf("æ²¡æœ‰å­¦ç”Ÿä¿¡æ¯ï¼\n");
     }
     else{
         fseek(fp, 0L, SEEK_SET);
         fread(&CurrentSTU, size, 1, fp);
-        printf("   Ñ§ºÅ      Ãû×Ö     ·ÖÊı\n");
+        printf("   å­¦å·      åå­—     åˆ†æ•°\n");
         while(!feof(fp)){ 
             printf("%6s %-11s%7.1f\n",
             CurrentSTU.id, CurrentSTU.name, CurrentSTU.score);
@@ -83,38 +83,60 @@ void queryAllInfo(){
     fclose(fp);
 }
 
-//ĞÂÔöÑ§ÉúĞÅÏ¢²¢¼ÆËã×Ü·ÖºÍÆ½¾ù·Ö
+//æ–°å¢å­¦ç”Ÿä¿¡æ¯å¹¶è®¡ç®—æ€»åˆ†å’Œå¹³å‡åˆ†
 void addNewInfo(){
     FILE *fp = openFile("ab+");
     struct STU NewStu;
-    printf("ÇëÊäÈëÑ§ºÅ£º");
+    printf("è¯·è¾“å…¥å­¦å·ï¼š");
     scanf("%s",&NewStu.id);
-    printf("ÇëÊäÈëÃû×Ö£º");
+    printf("è¯·è¾“å…¥åå­—ï¼š");
     scanf("%s",&NewStu.name);
-    printf("ÇëÊäÈë·ÖÊı£º");
+    printf("è¯·è¾“å…¥åˆ†æ•°ï¼š");
     scanf("%lf",&NewStu.score);
     NewStu.score = (double)NewStu.score;
     fwrite(&NewStu, size, 1, fp);
-    printf("Ğ´Èë³É¹¦");
+    printf("å†™å…¥æˆåŠŸ");
     fclose(fp);
 }
 
-//¸ù¾İÑ§ºÅ²éÑ¯ĞÅÏ¢
+//æ ¹æ®å­¦å·æŸ¥è¯¢ä¿¡æ¯
 void queryIdInfo(){
-    printf("TEST");
+    FILE *fp = openFile("r"); 
+    struct STU CurrentSTU;
+	int flag=0;
+	char m[20];
+	printf("è¯·è¾“å…¥å­¦å·ï¼š\n");
+	scanf("%s",m);
+
+    while(!feof(fp))
+	{
+		fread(&CurrentSTU, size, 1, fp);                      
+		while(strcmp(CurrentSTU.id,m)==0){
+			flag=1;
+			printf("å­¦å·: %s\n",CurrentSTU.id);
+	    	printf("å§“å: %s\n",CurrentSTU.name);
+			printf("åˆ†æ•°: %.1lf\n",CurrentSTU.score);
+			break;
+		}
+     }
+	if(flag==0){
+		printf("æ²¡æœ‰æ­¤äºº!\n");
+		return;
+	}
+	fclose(fp);
 }
 
-//ĞŞ¸ÄĞÅÏ¢
+//ä¿®æ”¹ä¿¡æ¯
 void updateInfo(){
 ;
 }
-//É¾³ıĞÅÏ¢
+//åˆ é™¤ä¿¡æ¯
 void deleteInfo(){
 ;
 }
 
 
-//ÅÅĞò
+//æ’åº
 void sortInfo(){
 ;
 }
