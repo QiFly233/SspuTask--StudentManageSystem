@@ -24,55 +24,62 @@ int SubjectNum = 3;
 long size = sizeof(struct STU);
 
 //排序规则
-int cmpid(const void*a,const void*b){//学号排序 
-	STU*pa=(STU*)a;
-	STU*pb=(STU*)b;
-	return strcmp(pa->id,pb->id);
+int cmpid(const void *a, const void *b)
+{ //学号排序
+    STU *pa = (STU *)a;
+    STU *pb = (STU *)b;
+    return strcmp(pa->id, pb->id);
 }
-int cmpname(const void*a,const void*b){//姓名排序 
-	STU*pa=(STU*)a;
-	STU*pb=(STU*)b;
-	return strcmp(pa->name,pb->name);
+int cmpname(const void *a, const void *b)
+{ //姓名排序
+    STU *pa = (STU *)a;
+    STU *pb = (STU *)b;
+    return strcmp(pa->name, pb->name);
 }
-int cmpmath(const void*a,const void*b){//数学排序 
-	STU*pa=(STU*)a;
-	STU*pb=(STU*)b;
-	if(pa->math!=pb->math)
-	return pa->math-pb->math; 
-	else
-	return strcmp(pa->id,pb->id); 
-} 
-int cmpenglish(const void*a,const void*b){//英语排序 
-	STU*pa=(STU*)a;
-	STU*pb=(STU*)b;
-	if(pa->english!=pb->english)
-	return pa->english-pb->english; 
-	else
-	return strcmp(pa->id,pb->id); 
-} 
-int cmpcs(const void*a,const void*b){//computer science排序 
-	STU*pa=(STU*)a;
-	STU*pb=(STU*)b;
-	if(pa->cs!=pb->cs)
-	return pa->cs-pb->cs; 
-	else
-	return strcmp(pa->id,pb->id); 
-} 
-int cmpscore(const void*a,const void*b){//总分排序 
-	STU*pa=(STU*)a;
-	STU*pb=(STU*)b;
-	if(pa->score!=pb->score)
-	return pa->score-pb->score; 
-	else
-	return strcmp(pa->id,pb->id); 
-} 
-int cmpaver(const void*a,const void*b){//平均分排序 
-	STU*pa=(STU*)a;
-	STU*pb=(STU*)b;
-	if(pa->aver!=pb->aver)
-	return pa->aver-pb->aver; 
-	else
-	return strcmp(pa->id,pb->id); 
+int cmpmath(const void *a, const void *b)
+{ //数学排序
+    STU *pa = (STU *)a;
+    STU *pb = (STU *)b;
+    if (pa->math != pb->math)
+        return pa->math - pb->math;
+    else
+        return strcmp(pa->id, pb->id);
+}
+int cmpenglish(const void *a, const void *b)
+{ //英语排序
+    STU *pa = (STU *)a;
+    STU *pb = (STU *)b;
+    if (pa->english != pb->english)
+        return pa->english - pb->english;
+    else
+        return strcmp(pa->id, pb->id);
+}
+int cmpcs(const void *a, const void *b)
+{ //computer science排序
+    STU *pa = (STU *)a;
+    STU *pb = (STU *)b;
+    if (pa->cs != pb->cs)
+        return pa->cs - pb->cs;
+    else
+        return strcmp(pa->id, pb->id);
+}
+int cmpscore(const void *a, const void *b)
+{ //总分排序
+    STU *pa = (STU *)a;
+    STU *pb = (STU *)b;
+    if (pa->score != pb->score)
+        return pa->score - pb->score;
+    else
+        return strcmp(pa->id, pb->id);
+}
+int cmpaver(const void *a, const void *b)
+{ //平均分排序
+    STU *pa = (STU *)a;
+    STU *pb = (STU *)b;
+    if (pa->aver != pb->aver)
+        return pa->aver - pb->aver;
+    else
+        return strcmp(pa->id, pb->id);
 }
 
 void echo()
@@ -158,14 +165,16 @@ void addNewInfo()
     int isQuery = 0;
     printf("请输入学号：");
     scanf("%s", &NewStu.id);
-    while(!feof(fp)){
+    while (!feof(fp))
+    {
         fread(&CurrentStu, size, 1, fp);
-        if(strcmp(CurrentStu.id, NewStu.id) == 0)
+        if (strcmp(CurrentStu.id, NewStu.id) == 0)
             isQuery = 1;
     }
-    if(isQuery){
+    if (isQuery)
+    {
         printf("该学号已存在\n");
-        return ;
+        return;
     }
     printf("请输入名字：");
     scanf("%s", &NewStu.name);
@@ -186,59 +195,61 @@ void addNewInfo()
 //根据学号查询信息
 void queryIdInfo()
 {
-    FILE *fp = openFile("r"); 
+    FILE *fp = openFile("r");
     struct STU CurrentSTU;
-	int flag=0;
-	char m[20];
-	printf("请输入学号：\n");
-	scanf("%s",m);
+    int flag = 0;
+    char m[20];
+    printf("请输入学号：\n");
+    scanf("%s", m);
 
- 
-    while(!feof(fp))
-	{
-		fread(&CurrentSTU, size, 1, fp);                      
-		if(strcmp(CurrentSTU.id,m)==0){
-			flag=1;
-			break;
-		}
-     }
+    while (!feof(fp))
+    {
+        fread(&CurrentSTU, size, 1, fp);
+        if (strcmp(CurrentSTU.id, m) == 0)
+        {
+            flag = 1;
+            break;
+        }
+    }
 
-	if(flag==0){
-		printf("未找到该学生信息!\n");
-		return;
-	}
-	else{
-		printf("学号: %s\n", CurrentSTU.id);
+    if (flag == 0)
+    {
+        printf("未找到该学生信息!\n");
+        return;
+    }
+    else
+    {
+        printf("学号: %s\n", CurrentSTU.id);
         printf("姓名: %s\n", CurrentSTU.name);
         printf("Math: %.1lf\n", CurrentSTU.math);
         printf("Computer Science: %.1lf\n", CurrentSTU.cs);
         printf("English: %.1lf\n", CurrentSTU.english);
         printf("总分: %.1lf\n", CurrentSTU.score);
         printf("平均分: %.1lf\n", CurrentSTU.aver);
-	}
-	fclose(fp);
+    }
+    fclose(fp);
 }
 
 //修改信息
 void updateInfo()
 {
-    int flag, fflag = 0;//flag 是否更改 sflag 是否修改科目 fflag 是否找到对象 
+    int flag, fflag = 0; //flag 是否更改 sflag 是否修改科目 fflag 是否找到对象
     char nid[20], nname[20];
-    double nscore,naver; 
+    double nscore, naver;
     STU stu;
     FILE *fp = fopen(file, "r+");
     printf("请输入学号：");
     scanf("%s", &nid);
-    while (fread(&stu, size, 1, fp) == 1)//遍历文件 寻找对象 
+    while (fread(&stu, size, 1, fp) == 1) //遍历文件 寻找对象
     {
-        if (strcmp(stu.id, nid) == 0)//找到对象进行修改 
-        {	
+        if (strcmp(stu.id, nid) == 0) //找到对象进行修改
+        {
             printf("该学号信息如下\n");
             printf("   学号       名字     Math  CS English  总分  平均分\n");
             printf("%12s  %-7s %5.1f %5.1f %5.1f %5.1f %6.2f\n",
                    stu.id, stu.name, stu.math, stu.cs, stu.english, stu.score, stu.aver);
-			flag = 0;//初始化 
-        	fflag = 1;//找到对象
+            flag = 0;  //初始化
+            fflag = 1; //找到对象
             printf("是否修改学号\n是------1(除0以外的任何数)\t否------0\n");
             scanf("%d", &flag);
             if (flag)
@@ -259,41 +270,47 @@ void updateInfo()
             scanf("%d", &flag);
             if (flag)
             {
-            	int sflag;
-				double nmath,ncs,nenglish;
-            	printf("是否修改math分数\n是------1(除0以外的任何数)\t否------0\n");
-            	scanf("%d", &sflag);
-            	if(sflag){
-				 printf("请输入修改后分数：");
-                scanf("%lf", &nmath);
-                stu.math = nmath;}
+                int sflag;
+                double nmath, ncs, nenglish;
+                printf("是否修改math分数\n是------1(除0以外的任何数)\t否------0\n");
+                scanf("%d", &sflag);
+                if (sflag)
+                {
+                    printf("请输入修改后分数：");
+                    scanf("%lf", &nmath);
+                    stu.math = nmath;
+                }
                 printf("是否修改computer science分数\n是------1(除0以外的任何数)\t否------0\n");
-            	scanf("%d", &sflag);
-            	if(sflag){
-				printf("请输入修改后分数：");
-                scanf("%lf", &ncs);
-                stu.cs = ncs;}
+                scanf("%d", &sflag);
+                if (sflag)
+                {
+                    printf("请输入修改后分数：");
+                    scanf("%lf", &ncs);
+                    stu.cs = ncs;
+                }
                 printf("是否修改english分数\n是------1(除0以外的任何数)\t否------0\n");
-            	scanf("%d", &sflag);
-            	if(sflag){printf("请输入修改后分数：");
-                scanf("%lf", &nenglish);
-                stu.english = nenglish;
-				}  
-				stu.score = stu.math + stu.cs + stu.english;
-				stu.aver = stu.score / SubjectNum;
+                scanf("%d", &sflag);
+                if (sflag)
+                {
+                    printf("请输入修改后分数：");
+                    scanf("%lf", &nenglish);
+                    stu.english = nenglish;
+                }
+                stu.score = stu.math + stu.cs + stu.english;
+                stu.aver = stu.score / SubjectNum;
             }
-			fseek(fp, -size, SEEK_CUR);
-			fwrite(&stu, size, 1, fp);
-			goto out;
+            fseek(fp, -size, SEEK_CUR);
+            fwrite(&stu, size, 1, fp);
+            goto out;
         }
     }
-    out:
+out:
     if (!fflag)
         printf("没有此人!\n");
     else
-    	printf("修改成功!\n");
+        printf("修改成功!\n");
     fclose(fp);
-} 
+}
 
 //删除信息
 void deleteInfo()
@@ -337,13 +354,12 @@ void deleteInfo()
     }
 }
 
-
 //排序
-void sortInfo() 
+void sortInfo()
 {
     FILE *fp = openFile("ab+");
-    int people=0,choice;
-    struct STU allstu[10000]; 
+    int people = 0, choice;
+    struct STU allstu[10000];
     while (!feof(fp))
     {
         fread(&allstu[people], size, 1, fp);
@@ -352,25 +368,43 @@ void sortInfo()
     people--;
     fclose(fp);
     printf("请选择排序规则：\n1.按学号排序\n2.按姓名排序\n3.按Math分数排序\n4.按English分数排序\n5.按computer science分数排序\n6.按总分排序\n7.按平均分排序\n");
-	scanf("%d",&choice);
-	switch(choice){
-		case 1:qsort(allstu,people,sizeof(allstu[0]),cmpid); break;
-		case 2:qsort(allstu,people,sizeof(allstu[0]),cmpname); break;
-		case 3:qsort(allstu,people,sizeof(allstu[0]),cmpmath); break;
-		case 4:qsort(allstu,people,sizeof(allstu[0]),cmpenglish); break;
-		case 5:qsort(allstu,people,sizeof(allstu[0]),cmpcs); break;
-		case 6:qsort(allstu,people,sizeof(allstu[0]),cmpscore); break;
-		case 7:qsort(allstu,people,sizeof(allstu[0]),cmpaver); break;
-		default:printf("非法输入！\n"); break;
-	} 
-	int i=0;
-	fp = openFile("r+");
-	fseek(fp, 0, SEEK_SET);
-	while (!feof(fp))
+    scanf("%d", &choice);
+    switch (choice)
     {
-       	fwrite(&allstu[i], size, 1, fp);
+    case 1:
+        qsort(allstu, people, sizeof(allstu[0]), cmpid);
+        break;
+    case 2:
+        qsort(allstu, people, sizeof(allstu[0]), cmpname);
+        break;
+    case 3:
+        qsort(allstu, people, sizeof(allstu[0]), cmpmath);
+        break;
+    case 4:
+        qsort(allstu, people, sizeof(allstu[0]), cmpenglish);
+        break;
+    case 5:
+        qsort(allstu, people, sizeof(allstu[0]), cmpcs);
+        break;
+    case 6:
+        qsort(allstu, people, sizeof(allstu[0]), cmpscore);
+        break;
+    case 7:
+        qsort(allstu, people, sizeof(allstu[0]), cmpaver);
+        break;
+    default:
+        printf("非法输入！\n");
+        break;
+    }
+    int i = 0;
+    fp = openFile("r+");
+    fseek(fp, 0, SEEK_SET);
+    while (!feof(fp))
+    {
+        fwrite(&allstu[i], size, 1, fp);
         i++;
-        if(i==people) break;
+        if (i == people)
+            break;
     }
     fclose(fp);
 }
@@ -410,8 +444,8 @@ int main()
             pressJump();
             break;
         default:
-        	printf("输入错误！\n"); 
-        	pressJump();
+            printf("输入错误！\n");
+            pressJump();
         }
         scanf("%d", &n);
     }
